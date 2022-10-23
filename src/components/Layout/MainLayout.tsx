@@ -1,73 +1,48 @@
-import { Dialog, Menu, Transition } from '@headlessui/react';
-import {
-  UserIcon,
-  FolderIcon,
-  HomeIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon,
-} from '@heroicons/react/outline';
-import clsx from 'clsx';
-import * as React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Dialog, Menu, Transition } from '@headlessui/react'
+import * as React from 'react'
+import { NavLink, Link } from 'react-router-dom'
 
-import logo from '@/assets/logo.svg';
-import { useAuth } from '@/lib/auth';
-import { useAuthorization, ROLES } from '@/lib/authorization';
+import logo from '@/assets/logo.svg'
+import { useAuth } from '@/lib/auth'
+import { useAuthorization, ROLES } from '@/lib/authorization'
 
 type SideNavigationItem = {
-  name: string;
-  to: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-};
+  name: string
+  to: string
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element
+}
 
 const SideNavigation = () => {
-  const { checkAccess } = useAuthorization();
+  const { checkAccess } = useAuthorization()
   const navigation = [
-    { name: 'Dashboard', to: '.', icon: HomeIcon },
-    { name: 'Discussions', to: './discussions', icon: FolderIcon },
+    { name: 'Dashboard', to: '.' },
+    { name: 'Discussions', to: './discussions' },
     checkAccess({ allowedRoles: [ROLES.ADMIN] }) && {
       name: 'Users',
       to: './users',
-      icon: UsersIcon,
     },
-  ].filter(Boolean) as SideNavigationItem[];
+  ].filter(Boolean) as SideNavigationItem[]
 
   return (
     <>
       {navigation.map((item, index) => (
-        <NavLink
-          end={index === 0}
-          key={item.name}
-          to={item.to}
-          className={clsx(
-            'text-gray-300 hover:bg-gray-700 hover:text-white',
-            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-          )}
-          activeClassName="bg-gray-900 text-white"
-        >
-          <item.icon
-            className={clsx(
-              'text-gray-400 group-hover:text-gray-300',
-              'mr-4 flex-shrink-0 h-6 w-6'
-            )}
-            aria-hidden="true"
-          />
+        <NavLink end={index === 0} key={item.name} to={item.to}>
+          <item.icon aria-hidden="true" />
           {item.name}
         </NavLink>
       ))}
     </>
-  );
-};
+  )
+}
 
 type UserNavigationItem = {
-  name: string;
-  to: string;
-  onClick?: () => void;
-};
+  name: string
+  to: string
+  onClick?: () => void
+}
 
 const UserNavigation = () => {
-  const { logout } = useAuth();
+  const { logout } = useAuth()
 
   const userNavigation = [
     { name: 'Your Profile', to: './profile' },
@@ -75,10 +50,10 @@ const UserNavigation = () => {
       name: 'Sign out',
       to: '',
       onClick: () => {
-        logout();
+        logout()
       },
     },
-  ].filter(Boolean) as UserNavigationItem[];
+  ].filter(Boolean) as UserNavigationItem[]
 
   return (
     <Menu as="div" className="ml-3 relative">
@@ -87,7 +62,6 @@ const UserNavigation = () => {
           <div>
             <Menu.Button className="max-w-xs  bg-gray-200 p-2 flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span className="sr-only">Open user menu</span>
-              <UserIcon className="h-8 w-8 rounded-full" />
             </Menu.Button>
           </div>
           <Transition
@@ -106,15 +80,8 @@ const UserNavigation = () => {
             >
               {userNavigation.map((item) => (
                 <Menu.Item key={item.name}>
-                  {({ active }) => (
-                    <Link
-                      onClick={item.onClick}
-                      to={item.to}
-                      className={clsx(
-                        active ? 'bg-gray-100' : '',
-                        'block px-4 py-2 text-sm text-gray-700'
-                      )}
-                    >
+                  {() => (
+                    <Link onClick={item.onClick} to={item.to}>
                       {item.name}
                     </Link>
                   )}
@@ -125,13 +92,13 @@ const UserNavigation = () => {
         </>
       )}
     </Menu>
-  );
-};
+  )
+}
 
 type MobileSidebarProps = {
-  sidebarOpen: boolean;
-  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+  sidebarOpen: boolean
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const MobileSidebar = ({ sidebarOpen, setSidebarOpen }: MobileSidebarProps) => {
   return (
@@ -179,7 +146,6 @@ const MobileSidebar = ({ sidebarOpen, setSidebarOpen }: MobileSidebarProps) => {
                   onClick={() => setSidebarOpen(false)}
                 >
                   <span className="sr-only">Close sidebar</span>
-                  <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
                 </button>
               </div>
             </Transition.Child>
@@ -196,8 +162,8 @@ const MobileSidebar = ({ sidebarOpen, setSidebarOpen }: MobileSidebarProps) => {
         <div className="flex-shrink-0 w-14" aria-hidden="true"></div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
 const Sidebar = () => {
   return (
@@ -215,28 +181,33 @@ const Sidebar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Logo = () => {
   return (
     <Link className="flex items-center text-white" to=".">
       <img className="h-8 w-auto" src={logo} alt="Workflow" />
-      <span className="text-xl text-white font-semibold">Bulletproof React</span>
+      <span className="text-xl text-white font-semibold">
+        Bulletproof React
+      </span>
     </Link>
-  );
-};
+  )
+}
 
 type MainLayoutProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
-  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const [sidebarOpen, setSidebarOpen] = React.useState(false)
 
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">
-      <MobileSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <MobileSidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
       <Sidebar />
       <div className="flex flex-col w-0 flex-1 overflow-hidden">
         <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
@@ -245,7 +216,6 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
           </button>
           <div className="flex-1 px-4 flex justify-end">
             <div className="ml-4 flex items-center md:ml-6">
@@ -253,8 +223,10 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
             </div>
           </div>
         </div>
-        <main className="flex-1 relative overflow-y-auto focus:outline-none">{children}</main>
+        <main className="flex-1 relative overflow-y-auto focus:outline-none">
+          {children}
+        </main>
       </div>
     </div>
-  );
-};
+  )
+}

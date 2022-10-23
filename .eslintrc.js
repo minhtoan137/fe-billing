@@ -4,13 +4,24 @@ module.exports = {
     node: true,
     es6: true,
   },
-  parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   ignorePatterns: ['node_modules/*'],
-  extends: ['eslint:recommended'],
+  extends: [
+    'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
+    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
+  ],
+  plugins: ['react'],
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],
       parser: '@typescript-eslint/parser',
+
       settings: {
         react: { version: 'detect' },
         'import/resolver': {
@@ -32,8 +43,6 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:prettier/recommended',
-        'plugin:testing-library/react',
-        'plugin:jest-dom/recommended',
       ],
       rules: {
         'no-restricted-imports': [
@@ -42,13 +51,21 @@ module.exports = {
             patterns: ['@/features/*/*'],
           },
         ],
-        'linebreak-style': ['error', 'unix'],
+        'linebreak-style': 0,
         'react/prop-types': 'off',
 
         'import/order': [
           'error',
           {
-            groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
+            groups: [
+              'builtin',
+              'external',
+              'internal',
+              'parent',
+              'sibling',
+              'index',
+              'object',
+            ],
             'newlines-between': 'always',
             alphabetize: { order: 'asc', caseInsensitive: true },
           },
@@ -63,13 +80,26 @@ module.exports = {
 
         '@typescript-eslint/no-unused-vars': ['error'],
 
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': [
+          'warn',
+          {
+            additionalHooks:
+              '(useRecoilCallback|useRecoilTransaction_UNSTABLE)',
+          },
+        ],
+
         '@typescript-eslint/explicit-function-return-type': ['off'],
         '@typescript-eslint/explicit-module-boundary-types': ['off'],
         '@typescript-eslint/no-empty-function': ['off'],
         '@typescript-eslint/no-explicit-any': ['off'],
 
-        'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+        'prettier/prettier': [
+          'error',
+          { endOfLine: 'auto', semi: false },
+          { usePrettierrc: true },
+        ],
       },
     },
   ],
-};
+}

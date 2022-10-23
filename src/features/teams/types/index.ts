@@ -1,6 +1,6 @@
-import { BaseEntity } from '@/types';
+import { BaseEntity } from '@/types'
 
 export type Team = {
-  name: string;
-  description: string;
-} & BaseEntity;
+  name: string
+  description: string
+} & BaseEntity

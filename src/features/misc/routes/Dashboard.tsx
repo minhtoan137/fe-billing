@@ -1,9 +1,9 @@
-import { ContentLayout } from '@/components/Layout';
-import { useAuth } from '@/lib/auth';
-import { ROLES } from '@/lib/authorization';
+import { ContentLayout } from '@/components/Layout'
+import { useAuth } from '@/lib/auth'
+import { ROLES } from '@/lib/authorization'
 
 export const Dashboard = () => {
-  const { user } = useAuth();
+  const { user } = useAuth()
   return (
     <ContentLayout title="Dashboard">
       <h1 className="text-xl mt-2">
@@ -29,5 +29,5 @@ export const Dashboard = () => {
         </ul>
       )}
     </ContentLayout>
-  );
-};
+  )
+}
