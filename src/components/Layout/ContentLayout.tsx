@@ -1,21 +1,33 @@
+import { Divider } from 'antd'
 import * as React from 'react'
 
-import { Head } from '../Head'
+// import { Head } from '../Head'
 
 type ContentLayoutProps = {
   children: React.ReactNode
-  title: string
+  // title: string
+  breadcrumb: React.ReactNode
+  extra?: React.ReactNode
 }
 
-export const ContentLayout = ({ children, title }: ContentLayoutProps) => {
+export const ContentLayout = ({
+  children,
+  breadcrumb,
+  extra,
+}: ContentLayoutProps) => {
   return (
     <>
-      <Head title={title} />
-      <div className="py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
+      {/* <Head title={title} /> */}
+
+      <div className="bg-white">
+        <div className="flex min-h-[56px] items-center justify-between py-3 px-6">
+          <h3 className="text-base font-bold">{breadcrumb}</h3>
+          <div>{extra}</div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">{children}</div>
+
+        <Divider dashed className="my-0 bg-[#F3F4F6]" />
+
+        <div className="py-6 px-6">{children}</div>
       </div>
     </>
   )
