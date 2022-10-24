@@ -1,8 +1,11 @@
 import { Button, Input, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { AddCircle, DocumentDownload, SearchNormal1 } from 'iconsax-react'
+import { useRef } from 'react'
 
 import { ContentLayout } from '@/components/Layout'
+
+import DrawerCustomer, { DrawerCustomerRef } from './DrawerCustomer'
 
 interface DataType {
   code: string
@@ -12,6 +15,8 @@ interface DataType {
 }
 
 export const Customers = () => {
+  const drawerCustomerRef = useRef<DrawerCustomerRef>(null)
+
   const dataSource: DataType[] = [
     {
       code: '1',
@@ -55,6 +60,19 @@ export const Customers = () => {
     },
   ]
 
+  const handleOpenDrawerCustomer = () => {
+    drawerCustomerRef.current?.showDrawer()
+  }
+
+  const handleClickRow = (
+    event: React.MouseEvent<any, MouseEvent>,
+    record: any,
+  ) => {
+    event.preventDefault()
+
+    console.log(record, 'record')
+  }
+
   return (
     <ContentLayout
       breadcrumb="Quản lý khách hàng"
@@ -67,7 +85,6 @@ export const Customers = () => {
           />
 
           <Button
-            // size='large'
             shape="circle"
             className=" flex min-h-[40px] min-w-[40px] items-center justify-center border-none bg-[#E1EDFB]"
             icon={<DocumentDownload color="#1890FF" variant="Bulk" />}
@@ -75,8 +92,9 @@ export const Customers = () => {
 
           <Button
             type="primary"
-            className="flex min-h-[40px] items-center justify-between gap-2 border-r-4 px-4 py-2"
+            onClick={handleOpenDrawerCustomer}
             icon={<AddCircle color="#FFFFFF" variant="Bulk" />}
+            className="flex min-h-[40px] items-center justify-between gap-2 border-r-4 px-4 py-2"
           >
             <span className="text-base">Tạo mới</span>
           </Button>
@@ -95,7 +113,14 @@ export const Customers = () => {
         // }}
         scroll={{ x: 'max-content' }}
         rowKey={(record) => record.code}
+        onRow={(record) => ({
+          onClick: (event) => {
+            handleClickRow(event, record)
+          },
+        })}
       />
+
+      <DrawerCustomer ref={drawerCustomerRef} />
     </ContentLayout>
   )
 }

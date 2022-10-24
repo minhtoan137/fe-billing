@@ -33,7 +33,7 @@ export const protectedRoutes: RouteObject[] = [
     element: <App />,
     children: [
       { path: '/', element: <Dashboard /> },
-      { path: 'customers', element: <CustomersRoute /> },
+      { path: 'customers/*', element: <CustomersRoute /> },
       // { path: '*', element: <Navigate to="." /> },
       { path: '*', element: <NotFound /> },
     ],
