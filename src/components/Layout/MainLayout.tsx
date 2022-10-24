@@ -42,7 +42,7 @@ type MainLayoutProps = {
 }
 
 const HeaderLogo = () => (
-  <div className="flex min-h-[56px] items-center gap-2 px-4 py-3">
+  <div className="flex max-h-[56px] items-center gap-2 px-4 py-3">
     <img className="h-8 w-auto" src={LogoIcon} alt="logo" />
     <b className="text-[16px] font-bold">iLotusLand JSC</b>
   </div>
