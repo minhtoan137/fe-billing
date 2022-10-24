@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './styles/tailwind/index.css';
 
 svg {
   vertical-align: baseline;
