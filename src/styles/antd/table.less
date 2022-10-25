@@ -1,9 +1,49 @@
+@import url('./colors.less');
+
 .customers-table {
-  .ant-table-content {
+  .utility-billing-table-content {
     height: calc(100vh - 10rem);
-    .ant-table-placeholder {
+    .utility-billing-table-placeholder {
       height: calc(100vh - 15rem);
     }
   }
+
+  /* Customize website's scrollbar like Mac OS
+    Not supports in Firefox and IE */
+
+  /* total width */
+  ::-webkit-scrollbar {
+    background-color: #fff;
+    width: 16px;
+  }
+
+  /* background of the scrollbar except button or resizer */
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+
+  /* scrollbar itself */
+  ::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 16px;
+    border: 6px solid #fff;
+  }
+
+  /* set button(top and bottom of the scrollbar) */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
 }
 
+.utility-billing-table-container {
+  border: 1px solid @gray-100;
+}
+
+.utility-billing-table-thead > tr > th {
+  background-color: @gray-100;
+  color: @gray-900;
+}
+
+.utility-billing-table-tbody > tr > td {
+  border-bottom: none;
+}

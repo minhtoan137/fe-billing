@@ -15,7 +15,7 @@ interface DataType {
 }
 
 export const Customers = () => {
-  const drawerCustomerRef = useRef<DrawerCustomerRef>(null)
+  const drawerCustomerRef = useRef<DrawerCustomerRef | null>(null)
 
   const dataSource: DataType[] = [
     {
@@ -66,7 +66,7 @@ export const Customers = () => {
 
   const handleClickRow = (
     event: React.MouseEvent<any, MouseEvent>,
-    record: any,
+    record: DataType,
   ) => {
     event.preventDefault()
 
@@ -79,14 +79,14 @@ export const Customers = () => {
       extra={
         <div className="flex items-center justify-between gap-4">
           <Input
-            className="flex min-h-[40px] w-[450px] items-center text-base"
+            className="w-[450px]"
             placeholder="Tìm kiếm MST, mã khách hàng, tên khách hàng"
             suffix={<SearchNormal1 size={19} variant="Bulk" />}
           />
 
           <Button
             shape="circle"
-            className=" flex min-h-[40px] min-w-[40px] items-center justify-center border-none bg-[#E1EDFB]"
+            className="min-w-[40px]"
             icon={<DocumentDownload color="#1890FF" variant="Bulk" />}
           />
 
@@ -94,7 +94,6 @@ export const Customers = () => {
             type="primary"
             onClick={handleOpenDrawerCustomer}
             icon={<AddCircle color="#FFFFFF" variant="Bulk" />}
-            className="flex min-h-[40px] items-center justify-between gap-2 border-r-4 px-4 py-2"
           >
             <span className="text-base">Tạo mới</span>
           </Button>
@@ -103,7 +102,7 @@ export const Customers = () => {
     >
       <Table
         // loading
-        bordered
+        // bordered
         dataSource={dataSource}
         className="customers-table"
         columns={columns}

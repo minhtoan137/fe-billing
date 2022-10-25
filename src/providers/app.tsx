@@ -1,3 +1,4 @@
+import { ConfigProvider } from 'antd'
 import * as React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { HelmetProvider } from 'react-helmet-async'
@@ -43,7 +44,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
           <QueryClientProvider client={queryClient}>
             {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}
             <AuthProvider>
-              <Router>{children}</Router>
+              <ConfigProvider componentSize="large" prefixCls="utility-billing">
+                <Router>{children}</Router>
+              </ConfigProvider>
             </AuthProvider>
           </QueryClientProvider>
         </HelmetProvider>
