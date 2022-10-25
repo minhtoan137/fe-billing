@@ -15,7 +15,16 @@ export default defineConfig(({ mode }) => {
       'process.env': { ...process.env, ...loadEnv(mode, process.cwd()) },
     },
     server: { port, host: true },
-    css: { preprocessorOptions: { less: { javascriptEnabled: true } } },
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+          modifyVars: {
+            '@ant-prefix': 'utility-billing',
+          },
+        },
+      },
+    },
     optimizeDeps: {
       // include: ['@ant-design/colors', '@ant-design/icons', 'iconsax-react'],
       include: ['iconsax-react'],
