@@ -1,0 +1,27 @@
+@import url('./colors.less');
+
+.utility-billing-breadcrumb {
+  > ol > li {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+    .utility-billing-breadcrumb-link {
+      > a {
+        color: @gray-500;
+
+        &:hover {
+          color: @gray-900;
+        }
+      }
+    }
+  }
+
+  .utility-billing-breadcrumb-separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
