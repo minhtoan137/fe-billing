@@ -90,14 +90,13 @@ export const Customers = () => {
             icon={<DocumentDownload color="#1890FF" variant="Bulk" />}
           />
 
-          {/* 
           <Button
             type="primary"
             onClick={handleOpenDrawerCustomer}
             icon={<AddCircle color="#FFFFFF" variant="Bulk" />}
           >
             <span className="text-base">Tạo mới</span>
-          </Button> */}
+          </Button>
         </div>
       }
     >
