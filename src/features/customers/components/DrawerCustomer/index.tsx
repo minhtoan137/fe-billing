@@ -2,6 +2,8 @@ import { Button, Col, Drawer, Form, Input, Row } from 'antd'
 import { Refresh2 } from 'iconsax-react'
 import { forwardRef, useImperativeHandle, useState } from 'react'
 
+import { openNotification } from '@/utils'
+
 type DrawerCustomerProps = Record<string, unknown>
 
 export type DrawerCustomerRef = {
@@ -30,6 +32,18 @@ const DrawerCustomer = forwardRef<DrawerCustomerRef, DrawerCustomerProps>(
         .validateFields()
         .then((values) => {
           console.log('🚀 ~ file:  ~ values', values)
+
+          openNotification({
+            type: 'success',
+            message: 'Xoá thành công',
+            description: (
+              <>
+                Thiết bị <span className="font-bold">“HU700720035100”</span> đã
+                được xoá khỏi danh sách thiết bị
+              </>
+            ),
+          })
+
           onClose()
         })
         .catch((errorInfo) => {
@@ -48,14 +62,12 @@ const DrawerCustomer = forwardRef<DrawerCustomerRef, DrawerCustomerProps>(
     )
     return (
       <Drawer
-        title={<b>Tạo khách hàng</b>}
-        width="26.25%"
-        // width={722}
-        onClose={onClose}
         open={open}
-        extra={extraButton}
         destroyOnClose
-        className="ehhehe"
+        width="26.25%"
+        onClose={onClose}
+        extra={extraButton}
+        title={<b>Tạo khách hàng</b>}
       >
         <Form form={form} layout="vertical" name="customer_form">
           <Row>

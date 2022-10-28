@@ -1,4 +1,4 @@
-import { ConfigProvider, notification } from 'antd'
+import { ConfigProvider } from 'antd'
 import * as React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { HelmetProvider } from 'react-helmet-async'
@@ -8,10 +8,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { AuthProvider } from '@/lib/auth'
 import { queryClient } from '@/lib/react-query'
-
-notification.config({
-  prefixCls: 'utility-billing-notification',
-})
 
 const ErrorFallback = () => {
   return (
@@ -46,9 +42,14 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
-            {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}
+            {/* {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />} */}
+            {import.meta.env.MODE !== 'test' && <ReactQueryDevtools />}
+
             <AuthProvider>
-              <ConfigProvider componentSize="large" prefixCls="utility-billing">
+              <ConfigProvider
+                componentSize="large"
+                prefixCls={import.meta.env.VITE_PREFIX_CLS}
+              >
                 <Router>{children}</Router>
               </ConfigProvider>
             </AuthProvider>

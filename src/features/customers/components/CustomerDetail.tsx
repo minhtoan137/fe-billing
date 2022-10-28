@@ -1,8 +1,8 @@
 import { Tabs } from 'antd'
 import type { Tab } from 'rc-tabs/lib/interface'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import { TextBadge, Breadcrumb } from '@/components/Elements'
+import { Breadcrumb, TextBadge } from '@/components/Elements'
 import { ContentLayout } from '@/components/Layout'
 
 import BasicInformation from './BasicInformation'
@@ -10,7 +10,6 @@ import TableDevice from './TableDevice'
 
 export const CustomerDetail = () => {
   const params = useParams()
-  const navigate = useNavigate()
   console.log('🚀 ~ file: Cetail ~ params', params)
 
   const items: Tab[] = [
@@ -24,9 +23,10 @@ export const CustomerDetail = () => {
 
   const breadcrumb = (
     <Breadcrumb
-      subTitle="Mã khách hàng"
-      title="Quản lý khách hàng"
-      onClick={() => navigate('/customers')}
+      routes={[
+        { path: 'customers', breadcrumbName: 'Quản lý khách hàng' },
+        { path: 'customerCode', breadcrumbName: 'Mã khách hàng' },
+      ]}
     />
   )
 
