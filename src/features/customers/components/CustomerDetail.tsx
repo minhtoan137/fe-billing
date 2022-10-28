@@ -1,8 +1,8 @@
-import { Badge, Breadcrumb, Space, Tabs } from 'antd'
-import { ArrowRight2 } from 'iconsax-react'
+import { Tabs } from 'antd'
 import type { Tab } from 'rc-tabs/lib/interface'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { TextBadge, Breadcrumb } from '@/components/Elements'
 import { ContentLayout } from '@/components/Layout'
 
 import BasicInformation from './BasicInformation'
@@ -12,30 +12,22 @@ export const CustomerDetail = () => {
   const params = useParams()
   const navigate = useNavigate()
   console.log('🚀 ~ file: Cetail ~ params', params)
+
   const items: Tab[] = [
     { label: 'Thông tin cơ bản', key: 'info', children: <BasicInformation /> },
     {
-      label: (
-        <Space>
-          <span>Thiết bị</span>
-          <Badge count={25} />
-        </Space>
-      ),
+      label: <TextBadge count={25} text="Thiết bị" />,
       key: 'device',
       children: <TableDevice />,
     },
   ]
 
   const breadcrumb = (
-    <Breadcrumb separator={<ArrowRight2 />}>
-      <Breadcrumb.Item
-        className="cursor-pointer"
-        onClick={() => navigate('/customers')}
-      >
-        Quản lý khách hàng
-      </Breadcrumb.Item>
-      <Breadcrumb.Item>Tên khách hàng</Breadcrumb.Item>
-    </Breadcrumb>
+    <Breadcrumb
+      subTitle="Mã khách hàng"
+      title="Quản lý khách hàng"
+      onClick={() => navigate('/customers')}
+    />
   )
 
   return (
