@@ -1,7 +1,15 @@
 import { Avatar, Button, Form, Image, Input, Table } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { Add } from 'iconsax-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+
+import { ModalSuccessRef } from '@/components/Modal'
+import { lazyImport } from '@/utils/lazyImport'
+
+const { ModalSuccess } = lazyImport(
+  () => import('@/components/Modal'),
+  'ModalSuccess',
+)
 
 interface DataType {
   code: string
@@ -68,6 +76,7 @@ const columns: ColumnsType<DataType> = [
 const TableDevice = () => {
   const [isCreate, setIsCreate] = useState<boolean>(false)
   const [form] = Form.useForm()
+  const modalSuccessRef = useRef<ModalSuccessRef | null>(null)
 
   const footer = () =>
     isCreate ? (
@@ -120,26 +129,42 @@ const TableDevice = () => {
     )
 
   return (
-    <Table
-      // loading
-      // bordered
-      footer={footer}
-      dataSource={dataSource}
-      // className="customers-table"
-      columns={columns}
-      // pagination={{
-      //   defaultPageSize: 10,
-      //   defaultCurrent: 1,
-      // }}
+    <>
+      <Table
+        // loading
+        // bordered
+        footer={footer}
+        dataSource={dataSource}
+        // className="customers-table"
+        columns={columns}
+        // pagination={{
+        //   defaultPageSize: 10,
+        //   defaultCurrent: 1,
+        // }}
 
-      scroll={{ x: 'max-content' }}
-      rowKey={(record) => record.code}
-      // onRow={(record) => ({
-      //   onClick: (event) => {
-      //     handleClickRow(event, record)
-      //   },
-      // })}
-    />
+        scroll={{ x: 'max-content' }}
+        rowKey={(record) => record.code}
+        // onRow={(record) => ({
+        //   onClick: (event) => {
+        //     handleClickRow(event, record)
+        //   },
+        // })}
+      />
+      <Button onClick={() => modalSuccessRef.current?.openModal()}>
+        Open Modal
+      </Button>
+
+      <ModalSuccess
+        ref={modalSuccessRef}
+        okText="Thêm thiết bị"
+        content={
+          <>
+            Khách hàng <span className="font-medium">“ LMXKH001 “</span> đã được
+            tạo thành công
+          </>
+        }
+      />
+    </>
   )
 }
 

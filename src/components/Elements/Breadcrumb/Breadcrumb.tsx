@@ -1,16 +1,36 @@
 import { Breadcrumb as BreadcrumbAnt } from 'antd'
 import { ArrowRight2 } from 'iconsax-react'
+import { Link } from 'react-router-dom'
 
-type BreadcrumbProps = {
-  title: string
-  subTitle?: string
-  onClick?: () => void
+type Route = {
+  path: string
+  breadcrumbName: string
+  children?: Omit<Route, 'children'>[]
 }
 
-export const Breadcrumb = ({ title, onClick, subTitle }: BreadcrumbProps) => (
-  <BreadcrumbAnt separator={<ArrowRight2 />}>
-    <BreadcrumbAnt.Item onClick={onClick}>{title}</BreadcrumbAnt.Item>
+type BreadcrumbProps = {
+  routes: Array<Route>
+}
 
-    {subTitle && <BreadcrumbAnt.Item>{subTitle}</BreadcrumbAnt.Item>}
-  </BreadcrumbAnt>
+export const Breadcrumb = ({ routes }: BreadcrumbProps) => (
+  <BreadcrumbAnt
+    routes={routes}
+    itemRender={itemRender}
+    separator={<ArrowRight2 />}
+  />
 )
+
+const itemRender = (
+  route: Route,
+  _: any,
+  routes: Array<Route>,
+  paths: Array<string>,
+) => {
+  const last = routes.indexOf(route) === routes.length - 1
+
+  return last ? (
+    <span>{route.breadcrumbName}</span>
+  ) : (
+    <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
+  )
+}

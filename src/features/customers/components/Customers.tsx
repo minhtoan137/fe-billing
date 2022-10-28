@@ -31,7 +31,11 @@ export const Customers = () => {
     console.log(record, 'record')
   }
 
-  const breadcrumb = <Breadcrumb title="Quản lý khách hàng" />
+  const breadcrumb = (
+    <Breadcrumb
+      routes={[{ path: 'customers', breadcrumbName: 'Quản lý khách hàng' }]}
+    />
+  )
 
   return (
     <ContentLayout

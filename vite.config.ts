@@ -7,6 +7,7 @@ import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 export default defineConfig(({ mode }) => {
   const env = { ...process.env, ...loadEnv(mode, process.cwd()) }
   const port = (env.VITE_PORT || 3000) as number
+  const prefixCls = env.VITE_PREFIX_CLS || 'utility-billing'
 
   return {
     resolve: {
@@ -23,8 +24,7 @@ export default defineConfig(({ mode }) => {
     server: { port, host: true },
 
     optimizeDeps: {
-      // include: ['@ant-design/colors', '@ant-design/icons', 'iconsax-react'],
-      include: ['iconsax-react'],
+      include: ['@ant-design/colors', '@ant-design/icons', 'iconsax-react'],
     },
     assetsInclude: ['**/*.svg'],
     build: {
@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         less: {
           javascriptEnabled: true,
-          modifyVars: { '@ant-prefix': 'utility-billing' },
+          modifyVars: { '@ant-prefix': prefixCls },
         },
       },
     },
