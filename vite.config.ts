@@ -9,22 +9,19 @@ export default defineConfig(({ mode }) => {
   const port = (env.VITE_PORT || 3000) as number
 
   return {
-    resolve: { alias: { '@': path.resolve(__dirname, './src') } },
+    resolve: {
+      alias: [
+        { find: '@', replacement: path.resolve(__dirname, './src') },
+        { find: /^~/, replacement: '' },
+      ],
+    },
+
     plugins: [react(), splitVendorChunkPlugin()],
     define: {
       'process.env': { ...process.env, ...loadEnv(mode, process.cwd()) },
     },
     server: { port, host: true },
-    css: {
-      preprocessorOptions: {
-        less: {
-          javascriptEnabled: true,
-          modifyVars: {
-            '@ant-prefix': 'utility-billing',
-          },
-        },
-      },
-    },
+
     optimizeDeps: {
       // include: ['@ant-design/colors', '@ant-design/icons', 'iconsax-react'],
       include: ['iconsax-react'],
@@ -32,8 +29,23 @@ export default defineConfig(({ mode }) => {
     assetsInclude: ['**/*.svg'],
     build: {
       chunkSizeWarningLimit: 1600,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-venders': ['react', 'react-dom'],
+          },
+        },
+      },
     },
-
+    css: {
+      modules: { localsConvention: 'camelCaseOnly' },
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+          modifyVars: { '@ant-prefix': 'utility-billing' },
+        },
+      },
+    },
     // mode: process.env ==== 'development'
     // base: '/billing/',
   }

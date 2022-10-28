@@ -1,6 +1,6 @@
-import colorsTailWind from 'tailwindcss/colors'
+const colorsTailWind = require('tailwindcss/colors')
 
-const colors = {
+module.exports = {
   ...colorsTailWind,
   orange: {
     100: '#FFF3EA',
@@ -11,6 +11,7 @@ const colors = {
   },
   gray: {
     100: '#F9FAFB',
+    200: '#F3F4F6',
     300: '#E5E7EB',
     400: '#D0D8E2',
     500: '#A2A7B3',
@@ -26,5 +27,3 @@ const colors = {
     primary: '#1890FF',
   },
 }
-
-export default colors

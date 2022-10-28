@@ -1,4 +1,4 @@
-import { Avatar, Divider, Image, Layout, Menu, MenuProps } from 'antd'
+import { Avatar, Image, Layout, Menu, MenuProps } from 'antd'
 import { DocumentFilter, Folder, Home3, Setting2 } from 'iconsax-react'
 import React from 'react'
 
@@ -44,7 +44,7 @@ type MainLayoutProps = {
 const HeaderLogo = () => (
   <div className="flex max-h-[56px] items-center gap-2 px-4 py-3">
     <img className="h-8 w-auto" src={LogoIcon} alt="logo" />
-    <b className="text-[16px] font-bold">iLotusLand JSC</b>
+    <b className="text-[16px]">iLotusLand JSC</b>
   </div>
 )
 
@@ -75,22 +75,23 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   // }
 
   return (
-    <Layout hasSider className="bg-white">
+    <Layout hasSider>
       <Sider
         // collapsible
         // collapsed={collapsed}
         // onCollapse={handleCollapseSider}
-        className="fixed left-0 top-0 bottom-0 h-[100vh] overflow-auto bg-white shadow-lg "
+        theme="light"
+        className="fixed left-0 top-0 bottom-0 h-[100vh] overflow-auto shadow-lg"
       >
         <HeaderLogo />
 
-        <Divider dashed className="my-0 bg-[#F3F4F6]" />
+        <div className="h-1 w-full bg-gray-200" />
 
         <Menu
           mode="inline"
           items={items}
           inlineIndent={0}
-          className="px-4 py-3 pr-0"
+          className="p-4 pr-0"
           defaultSelectedKeys={['dashboard']}
           // onClick={({ key }) => navigate(key)}
         />
@@ -98,7 +99,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
         <FooterSetting />
       </Sider>
 
-      <Layout className="site-layout ml-[200px]">{children}</Layout>
+      <Layout className="ml-[200px]">{children}</Layout>
     </Layout>
   )
 }

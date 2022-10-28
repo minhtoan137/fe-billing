@@ -1,3 +1,3 @@
-import colors from './colors'
+import * as colors from './colors'
 
-export { colors }
+export default colors

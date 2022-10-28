@@ -1,4 +1,4 @@
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, notification } from 'antd'
 import * as React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { HelmetProvider } from 'react-helmet-async'
@@ -8,6 +8,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { AuthProvider } from '@/lib/auth'
 import { queryClient } from '@/lib/react-query'
+
+notification.config({
+  prefixCls: 'utility-billing-notification',
+})
 
 const ErrorFallback = () => {
   return (
