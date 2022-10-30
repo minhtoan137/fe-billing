@@ -2,6 +2,7 @@ import { Button, Input, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { AddCircle, DocumentDownload, SearchNormal1 } from 'iconsax-react'
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Breadcrumb } from '@/components/Elements'
 import { ContentLayout } from '@/components/Layout'
@@ -16,6 +17,7 @@ interface DataType {
 }
 
 export const Customers = () => {
+  const navigate = useNavigate()
   const drawerCustomerRef = useRef<DrawerCustomerRef | null>(null)
 
   const handleOpenDrawerCustomer = () => {
@@ -27,6 +29,8 @@ export const Customers = () => {
     record: DataType,
   ) => {
     event.preventDefault()
+
+    navigate('/customers/123')
 
     console.log(record, 'record')
   }
@@ -50,14 +54,15 @@ export const Customers = () => {
 
           <Button
             shape="circle"
-            className="min-w-[40px]"
-            icon={<DocumentDownload color="#1890FF" variant="Bulk" />}
+            className="flex min-w-[40px] items-center justify-center"
+            icon={<DocumentDownload className="text-blue-500" variant="Bulk" />}
           />
 
           <Button
             type="primary"
+            className="flex gap-2"
             onClick={handleOpenDrawerCustomer}
-            icon={<AddCircle color="#FFFFFF" variant="Bulk" />}
+            icon={<AddCircle className="text-gray-0" variant="Bulk" />}
           >
             Tạo mới
           </Button>
@@ -76,8 +81,12 @@ export const Customers = () => {
         // }}
         scroll={{ x: 'max-content' }}
         rowKey={(record) => record.code}
+        rowClassName="cursor-pointer"
         onRow={(record) => ({
-          onClick: (event) => {
+          // onClick: (event) => {
+          //   handleClickRow(event, record)
+          // },
+          onDoubleClick: (event) => {
             handleClickRow(event, record)
           },
         })}

@@ -2,14 +2,19 @@
 
 @btn-font-weight: 500;
 
-.utility-billing-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
 .utility-billing-btn-circle {
   border: none;
   background-color: @blue-100;
+}
+
+.utility-billing-btn.utility-billing-btn-text {
+  color: @blue-500;
+
+  &:hover {
+    color: @blue-400;
+  }
+}
+
+.utility-billing-btn-dangerous.utility-billing-btn-primary {
+  background-color: @red-500;
 }

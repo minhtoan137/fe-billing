@@ -1,1 +1,1 @@
-export * from './ModalSuccess/index'
+export * from './ModalSuccess'

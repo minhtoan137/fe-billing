@@ -1,7 +1,7 @@
 import { Avatar, Button, Form, Image, Input, Table } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { Add } from 'iconsax-react'
-import { useRef, useState } from 'react'
+import { Suspense, useRef, useState } from 'react'
 
 import { ModalSuccessRef } from '@/components/Modal'
 import { lazyImport } from '@/utils/lazyImport'
@@ -90,7 +90,12 @@ const TableDevice = () => {
 
         <Form name="create_customer_device_form" form={form}>
           <Form.Item label="" name="code" className="mb-0">
-            <Input className="w-[650px]" placeholder="Nhập mã thiết bị" />
+            <Input
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+              className="w-[650px]"
+              placeholder="Nhập mã thiết bị"
+            />
           </Form.Item>
         </Form>
 
@@ -154,16 +159,18 @@ const TableDevice = () => {
         Open Modal
       </Button>
 
-      <ModalSuccess
-        ref={modalSuccessRef}
-        okText="Thêm thiết bị"
-        content={
-          <>
-            Khách hàng <span className="font-medium">“ LMXKH001 “</span> đã được
-            tạo thành công
-          </>
-        }
-      />
+      <Suspense fallback="Loading ...">
+        <ModalSuccess
+          ref={modalSuccessRef}
+          okText="Thêm thiết bị"
+          content={
+            <>
+              Khách hàng <span className="font-medium">“ LMXKH001 “</span> đã
+              được tạo thành công
+            </>
+          }
+        />
+      </Suspense>
     </>
   )
 }
