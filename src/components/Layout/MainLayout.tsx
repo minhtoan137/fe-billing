@@ -1,6 +1,7 @@
 import { Avatar, Image, Layout, Menu, MenuProps } from 'antd'
 import { DocumentFilter, Folder, Home3, Setting2 } from 'iconsax-react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import VietNamFlagIcon from '@/assets/icons/vietnamese.svg'
 import LogoIcon from '@/assets/logo.svg'
@@ -67,7 +68,7 @@ const FooterSetting = () => (
 )
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   // const [collapsed, setCollapsed] = useState<boolean>(false)
 
   // const handleCollapseSider = (collapsed: boolean) => {
@@ -92,8 +93,9 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
           items={items}
           inlineIndent={0}
           className="p-4 pr-0"
+          defaultOpenKeys={['dashboard']}
           defaultSelectedKeys={['dashboard']}
-          // onClick={({ key }) => navigate(key)}
+          onClick={({ key }) => navigate(key)}
         />
 
         <FooterSetting />

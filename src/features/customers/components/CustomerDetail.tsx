@@ -1,6 +1,6 @@
 import { Tabs } from 'antd'
 import type { Tab } from 'rc-tabs/lib/interface'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
 import { Breadcrumb, TextBadge } from '@/components/Elements'
 import { ContentLayout } from '@/components/Layout'
@@ -9,8 +9,8 @@ import BasicInformation from './BasicInformation'
 import TableDevice from './TableDevice'
 
 export const CustomerDetail = () => {
-  const params = useParams()
-  console.log('🚀 ~ file: Cetail ~ params', params)
+  // const params = useParams()
+  // console.log('🚀 ~ file: Cetail ~ params', params)
 
   const items: Tab[] = [
     { label: 'Thông tin cơ bản', key: 'info', children: <BasicInformation /> },
@@ -32,7 +32,7 @@ export const CustomerDetail = () => {
 
   return (
     <ContentLayout breadcrumb={breadcrumb}>
-      <Tabs defaultActiveKey="device" items={items} />
+      <Tabs defaultActiveKey="info" items={items} />
     </ContentLayout>
   )
 }

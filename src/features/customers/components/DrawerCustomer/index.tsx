@@ -1,4 +1,4 @@
-import { Button, Col, Drawer, Form, Input, Row } from 'antd'
+import { Button, Drawer, Form, Input } from 'antd'
 import { Refresh2 } from 'iconsax-react'
 import { forwardRef, useImperativeHandle, useState } from 'react'
 
@@ -60,6 +60,7 @@ const DrawerCustomer = forwardRef<DrawerCustomerRef, DrawerCustomerProps>(
         Tạo
       </Button>
     )
+
     return (
       <Drawer
         open={open}
@@ -70,8 +71,8 @@ const DrawerCustomer = forwardRef<DrawerCustomerRef, DrawerCustomerProps>(
         title={<b>Tạo khách hàng</b>}
       >
         <Form form={form} layout="vertical" name="customer_form">
-          <Row>
-            <Col span={24}>
+          <div className="flex min-w-0 flex-row flex-wrap">
+            <div className="relative block min-h-[1px] max-w-full flex-[0_0_100%]">
               <Form.Item
                 name="code"
                 label="Mã khách hàng"
@@ -81,11 +82,11 @@ const DrawerCustomer = forwardRef<DrawerCustomerRef, DrawerCustomerProps>(
               >
                 <Input placeholder="Nhập mã khách hàng" />
               </Form.Item>
-            </Col>
-          </Row>
+            </div>
+          </div>
 
-          <Row>
-            <Col span={24}>
+          <div className="flex min-w-0 flex-row flex-wrap">
+            <div className="relative block min-h-[1px] max-w-full flex-[0_0_100%]">
               <Form.Item
                 name="name"
                 label="Tên khách hàng"
@@ -95,11 +96,11 @@ const DrawerCustomer = forwardRef<DrawerCustomerRef, DrawerCustomerProps>(
               >
                 <Input placeholder="Nhập tên khách hàng" />
               </Form.Item>
-            </Col>
-          </Row>
+            </div>
+          </div>
 
-          <Row>
-            <Col span={24}>
+          <div className="flex min-w-0 flex-row flex-wrap">
+            <div className="relative block min-h-[1px] max-w-full flex-[0_0_100%]">
               <Form.Item
                 name="taxCode"
                 label="Mã số thuế"
@@ -109,20 +110,20 @@ const DrawerCustomer = forwardRef<DrawerCustomerRef, DrawerCustomerProps>(
               >
                 <Input placeholder="Nhập mã số thuế" />
               </Form.Item>
-            </Col>
-          </Row>
+            </div>
+          </div>
 
-          <Row>
-            <Col span={24}>
+          <div className="flex min-w-0 flex-row flex-wrap">
+            <div className="relative block min-h-[1px] max-w-full flex-[0_0_100%]">
               <Form.Item
                 name="address"
                 label="Địa chỉ"
                 rules={[{ required: true, message: 'Vui lòng nhập địa chỉ' }]}
               >
-                <Input.TextArea rows={2} placeholder="Nhập địa chỉ" />
+                <Input.TextArea rows={1} placeholder="Nhập địa chỉ" />
               </Form.Item>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Form>
 
         <div className="absolute bottom-0 left-0 w-full">
